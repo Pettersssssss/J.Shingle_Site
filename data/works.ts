@@ -36,7 +36,7 @@ export const works: Work[] = [
     state: "MG",
     summary: "Domo revestido de Shingle com deck e espaços de convivência na floresta.",
     coverAlt: "Domo da floresta com cobertura Shingle e deck de madeira",
-    imageCount: 14,
+    imageCount: 6,
   },
   {
     slug: "sapucai-aguas",
