@@ -30,15 +30,6 @@ export const works: Work[] = [
     imageCount: 6,
   },
   {
-    slug: "sapucai-aguas",
-    title: "Domo das águas",
-    city: "Sapucaí",
-    state: "MG",
-    summary: "Cobertura e detalhes de um domo geodésico em área arborizada.",
-    coverAlt: "Domo das águas com cobertura Shingle em área arborizada",
-    imageCount: 11,
-  },
-  {
     slug: "sarapui",
     title: "Sarapuí",
     city: "Sarapuí",
