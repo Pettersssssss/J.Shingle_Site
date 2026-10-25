@@ -9,13 +9,16 @@ import { ProjectCarousel } from "@/components/project-carousel";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { HeroTiltLogo } from "@/components/hero-tilt-logo";
 import { ShingleModelCard } from "@/components/shingle-model-card";
+import { FinishGallery } from "@/components/finish-gallery";
+import { works, workImage } from "@/data/works";
 
-const projects = [
-  { name: "O domo na paisagem", type: "Jambeiro · SP", image: "/jshingle-domo-aerial.webp", alt: "Vista aérea do domo geodésico e da paisagem em Jambeiro" },
-  { name: "Geometria em detalhe", type: "Cobertura Shingle", image: "/jshingle-domo-detail.webp", alt: "Encontro da cobertura Shingle com a fachada envidraçada do domo" },
-  { name: "A entrada", type: "Domo geodésico", image: "/jshingle-domo-entry.webp", alt: "Entrada do domo e recortes da cobertura Shingle" },
-  { name: "Arquitetura e entorno", type: "Jambeiro · SP", image: "/jshingle-hero.webp", alt: "Domo geodésico integrado ao jardim" },
-];
+const projects = works.map((work) => ({
+  name: work.title,
+  type: `${work.city} · ${work.state}`,
+  image: workImage(work, 1),
+  alt: work.coverAlt,
+  href: `/obras/${work.slug}`,
+}));
 
 export default function HomePage() {
   return (
@@ -61,7 +64,7 @@ export default function HomePage() {
             <header className="center-heading center-heading-light">
               <p className="eyebrow">Portfólio arquitetônico</p>
               <ScrollReveal><h2>Nossas obras.</h2></ScrollReveal>
-              <p>Fotografias de uma cobertura Shingle em Jambeiro, da paisagem aos detalhes.</p>
+              <p>Conheça projetos realizados em Belém, Sapucaí e Sarapuí.</p>
             </header>
             <ProjectCarousel projects={projects} />
             <div className="portfolio-action"><Link className="button button-white" href="/obras">Explorar Obras</Link></div>
@@ -87,11 +90,7 @@ export default function HomePage() {
               <ScrollReveal><h2>Detalhes que definem o resultado.</h2></ScrollReveal>
               <p>Encontros, recortes, bordas e transições tratados como parte da arquitetura.</p>
             </header>
-            <ScrollReveal className="finish-mosaic">
-              <div className="finish-tile finish-tile-main"><Image src="/jshingle-domo-detail.webp" alt="Revestimento Shingle e fachada envidraçada do domo" fill sizes="(max-width: 620px) 100vw, 60vw" /><span>Geometria e revestimento</span></div>
-              <div className="finish-tile"><Image src="/jshingle-domo-entry.webp" alt="Recortes de telhas na entrada do domo" fill sizes="(max-width: 620px) 100vw, 35vw" /><span>Recortes precisos</span></div>
-              <div className="finish-tile"><Image src="/jshingle-hero.webp" alt="Cobertura Shingle do domo integrada à paisagem" fill sizes="(max-width: 620px) 100vw, 35vw" /><span>Integração com a arquitetura</span></div>
-            </ScrollReveal>
+            <ScrollReveal><FinishGallery /></ScrollReveal>
           </div>
         </section>
 

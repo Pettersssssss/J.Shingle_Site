@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 import Link from "@/components/site-link";
-import { ShingleInquiry } from "@/components/shingle-inquiry";
+import { ShingleProductShowcase } from "@/components/shingle-product-showcase";
+import { PhotoZoom } from "@/components/photo-zoom";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { shingles } from "@/data/site";
@@ -38,24 +38,14 @@ export default async function ShingleDetailPage({ params }: { params: Promise<{ 
   return <><SiteHeader /><main>
     <section className="detail-hero shell">
       <Link href="/telhas" className="back-link">Voltar para o catálogo</Link>
-      <div className="shingle-detail-grid">
-        <div className="shingle-detail-copy">
-          <p className="eyebrow eyebrow-dark">Telha Shingle</p>
-          <h1>Modelo {item.name}</h1>
-          <p>{item.description}</p>
-          <ShingleInquiry item={item} />
-        </div>
-        <figure className="shingle-detail-cover">
-          <Image src={item.tones[0].image} alt={`Amostra ${item.tones[0].name} da telha ${item.name}`} fill sizes="(max-width: 860px) 100vw, 50vw" priority />
-          <figcaption>Acabamento ilustrado: {item.tones[0].name}</figcaption>
-        </figure>
-      </div>
+      <ShingleProductShowcase item={item} />
     </section>
     <section className="shingle-tone-section shell" aria-labelledby="shingle-colors-title">
       <header><p className="eyebrow eyebrow-dark">Acabamentos</p><h2 id="shingle-colors-title">Exemplos de cores do modelo {item.name}.</h2><p>Veja diferentes possibilidades para a cobertura. As cores podem variar entre telas; confirme a amostra física e a disponibilidade com a equipe.</p></header>
       <div className="shingle-tone-grid">
         {item.tones.map((tone) => <figure className="shingle-tone-card" key={tone.name}>
-          <div className="shingle-tone-photo"><Image src={tone.image} alt={`Textura da telha ${item.name} na cor ${tone.name}`} fill sizes="(max-width: 650px) 50vw, (max-width: 1050px) 33vw, 25vw" /></div>
+          <PhotoZoom src={tone.image} alt={`Textura da telha ${item.name} na cor ${tone.name}`} className="shingle-tone-photo" />
+          <figcaption>{tone.name}</figcaption>
           <figcaption>{tone.name}</figcaption>
         </figure>)}
       </div>

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 
-type Project = { name: string; type: string; image: string; alt: string };
+type Project = { name: string; type: string; image: string; alt: string; href: string };
 
 export function ProjectCarousel({ projects }: { projects: Project[] }) {
   const viewport = useRef<HTMLDivElement>(null);
@@ -114,10 +114,10 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
   }
 
   const cards = projects.map((project, index) => (
-    <article className={`project-card project-card-${index + 1}`} key={project.name}>
+    <a className={`project-card project-card-${index + 1}`} href={project.href} key={project.name} aria-label={`Ver obra ${project.name}`}>
       <Image src={project.image} alt={project.alt} fill sizes="(max-width: 860px) 82vw, 470px" />
       <div><h3>{project.name}</h3><p>{project.type}</p></div>
-    </article>
+    </a>
   ));
 
   return <div className="project-carousel" role="region" aria-roledescription="carrossel" aria-label="Prévia de obras">

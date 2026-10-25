@@ -837,6 +837,46 @@ body { background: #ffffff; }
 .shingle-spec dd { margin: 12px 0 8px; font: 700 clamp(1.45rem, 2vw, 1.9rem)/1.15 var(--font-display); }
 .shingle-spec p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.5; }
 .shingle-spec-note { max-width: 900px; margin: 28px 0 0; color: var(--muted); font-size: .9rem; }
+
+/* Requested photo galleries, selected finish preview, and WhatsApp shortcut. */
+.finish-section { background: #313e54; }
+.finish-mosaic { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto; min-height: 0; gap: 16px; }
+.finish-tile { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; padding: 0; border: 0; cursor: zoom-in; background: rgba(255,255,255,.08); }
+.finish-tile-main { grid-row: auto; }
+.finish-tile img { z-index: 0; object-fit: contain; transition: transform var(--motion-editorial) var(--ease-out); }
+.finish-tile::after { z-index: 1; pointer-events: none; }
+.finish-tile span { position: absolute; z-index: 2; bottom: 18px; left: 18px; margin: 0; border-radius: 999px; background: rgba(23,26,34,.78); color: #fff; padding: 7px 11px; font-size: .72rem; }
+.finish-tile:focus-visible, .photo-zoom-trigger:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.shingle-selected-tone { overflow: visible; }
+.shingle-selected-tone-image { position: absolute; inset: 0; }
+.photo-zoom-trigger { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; padding: 0; border: 0; color: inherit; cursor: zoom-in; text-align: left; }
+.photo-zoom-trigger img { object-fit: contain; }
+.shingle-selected-tone-image { border-radius: 26px; overflow: hidden; background: var(--mist); }
+.shingle-selected-tone-image img { object-fit: contain; }
+.photo-zoom-dialog { position: fixed; inset: 0; display: none; place-items: center; box-sizing: border-box; width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 16px; overflow: hidden; border: 0; background: transparent; color: #fff; }
+.photo-zoom-dialog[open] { display: grid; }
+.photo-zoom-dialog::backdrop { background: rgba(14,17,22,.92); backdrop-filter: blur(8px); }
+.photo-zoom-content { position: relative; width: min(1200px, calc(100vw - 32px)); height: min(90dvh, calc(100dvh - 32px)); overflow: hidden; border: 1px solid rgba(255,255,255,.2); border-radius: 18px; background: #11151b; }
+.photo-zoom-content img { object-fit: contain; }
+.photo-zoom-close { position: absolute; top: 12px; right: 12px; z-index: 2; display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; background: rgba(15,18,24,.78); color: #fff; cursor: pointer; }
+.shingle-tone-photo { width: 100%; aspect-ratio: 1; }
+.shingle-tone-photo img { object-fit: cover; }
+.shingle-spec { transition: background-color var(--motion-ui) ease, color var(--motion-ui) ease; }
+.shingle-spec dt, .shingle-spec p { transition: color var(--motion-ui) ease; }
+.whatsapp-float { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); z-index: 80; display: grid; width: 60px; height: 60px; place-items: center; border: 2px solid rgba(255,255,255,.9); border-radius: 50%; background: #25d366; color: #fff; box-shadow: 0 8px 28px rgba(0,0,0,.24); transition: transform var(--motion-press) var(--ease-out), box-shadow var(--motion-ui) ease; }
+.whatsapp-float svg { width: 32px; height: 32px; fill: currentColor; }
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover img { transform: scale(1.035); }
+  .finish-tile:hover img { transform: scale(1.025); }
+  .shingle-spec:hover { background: #313e54; color: #fff; }
+  .shingle-spec:hover dt, .shingle-spec:hover p { color: rgba(255,255,255,.76); }
+  .whatsapp-float:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.3); }
+}
+@media (max-width: 700px) {
+  .finish-mosaic { grid-template-columns: 1fr; }
+  .finish-tile { aspect-ratio: 4 / 5; }
+  .whatsapp-float { right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); width: 56px; height: 56px; }
+}
 @media (hover: hover) and (pointer: fine) {
   .button-outline:hover { background: var(--mist); }
 }
