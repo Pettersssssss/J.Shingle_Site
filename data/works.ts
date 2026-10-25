@@ -27,7 +27,7 @@ export const works: Work[] = [
     state: "PA",
     summary: "Cobertura Shingle integrada à arquitetura e à vegetação do entorno.",
     coverAlt: "Domo de cobertura Shingle em meio à vegetação de Belém",
-    imageCount: 11,
+    imageCount: 7,
   },
   {
     slug: "sapucai-floresta",
