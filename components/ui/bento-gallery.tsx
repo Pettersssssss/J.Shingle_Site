@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 export type BentoGalleryImage = {
   id: number | string;
   title: string;
-  desc: string;
   url: string;
   alt: string;
   span?: string;
@@ -20,16 +18,24 @@ type BentoGalleryProps = {
   description: string;
 };
 
+type ImageSize = { width: number; height: number };
+
 export default function InteractiveImageBentoGallery({
   imageItems,
   title,
   description,
 }: BentoGalleryProps) {
   const [selectedItem, setSelectedItem] = useState<BentoGalleryImage | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const viewportRef = useRef<HTMLDivElement>(null);
+  const [imageSizes, setImageSizes] = useState<Record<string, ImageSize>>({});
+  const [modalSize, setModalSize] = useState<ImageSize>({ width: 960, height: 960 });
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const dragRef = useRef({ pointerId: -1, startX: 0, scrollLeft: 0, moved: false });
+
+  function rememberImageSize(id: number | string, image: HTMLImageElement) {
+    setImageSizes((sizes) => ({
+      ...sizes,
+      [String(id)]: { width: image.naturalWidth, height: image.naturalHeight },
+    }));
+  }
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -39,88 +45,67 @@ export default function InteractiveImageBentoGallery({
     if (!selectedItem && dialog.open) dialog.close();
   }, [selectedItem]);
 
-  function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
-    if (event.pointerType !== "mouse" || event.button !== 0) return;
-    const viewport = viewportRef.current;
-    if (!viewport) return;
+  useEffect(() => {
+    if (!selectedItem) return;
+    const imageSize = imageSizes[String(selectedItem.id)] ?? { width: 1, height: 1 };
+    const ratio = imageSize.width / imageSize.height;
+    const maxWidth = Math.min(1200, window.innerWidth - 32);
+    const maxHeight = window.innerHeight - 32;
+    const width = Math.max(1, Math.min(maxWidth, maxHeight * ratio));
+    setModalSize({ width, height: width / ratio });
+  }, [selectedItem, imageSizes]);
 
-    dragRef.current = {
-      pointerId: event.pointerId,
-      startX: event.clientX,
-      scrollLeft: viewport.scrollLeft,
-      moved: false,
-    };
-    const captureTarget = event.target;
-    if (captureTarget instanceof HTMLElement) captureTarget.setPointerCapture(event.pointerId);
-  }
+  const itemStyle = (item: BentoGalleryImage): CSSProperties => {
+    const size = imageSizes[String(item.id)];
+    return { aspectRatio: size ? `${size.width} / ${size.height}` : "1 / 1" };
+  };
 
-  function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
-    const drag = dragRef.current;
-    const viewport = viewportRef.current;
-    if (drag.pointerId !== event.pointerId || !viewport) return;
-
-    const distance = event.clientX - drag.startX;
-    if (Math.abs(distance) > 5) {
-      drag.moved = true;
-      setIsDragging(true);
-    }
-    if (drag.moved) viewport.scrollLeft = drag.scrollLeft - distance;
-  }
-
-  function handlePointerEnd(event: ReactPointerEvent<HTMLDivElement>) {
-    if (dragRef.current.pointerId !== event.pointerId) return;
-    dragRef.current.pointerId = -1;
-    setIsDragging(false);
-    if (dragRef.current.moved) {
-      window.setTimeout(() => {
-        dragRef.current.moved = false;
-      }, 0);
-    }
-  }
+  const photoButton = (item: BentoGalleryImage, className: string) => (
+    <button
+      className={className}
+      key={item.id}
+      type="button"
+      style={itemStyle(item)}
+      onClick={() => setSelectedItem(item)}
+      aria-label={`Ampliar ${item.title}`}
+    >
+      <Image
+        src={item.url}
+        alt={item.alt}
+        fill
+        sizes="(max-width: 650px) 100vw, (max-width: 1050px) 50vw, 25vw"
+        unoptimized
+        onLoad={(event) => rememberImageSize(item.id, event.currentTarget)}
+      />
+    </button>
+  );
 
   return (
-    <section className="work-bento-section" aria-label={`Galeria de ${title}`}>
-      <header className="work-bento-header">
-        <h1>{title}</h1>
-        <p>{description}</p>
-        <span>Arraste para explorar · selecione uma foto para ampliar</span>
-      </header>
-
-      <div
-        ref={viewportRef}
-        className={cn("work-bento-viewport", isDragging && "is-dragging")}
-        role="region"
-        tabIndex={0}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerEnd}
-        onPointerCancel={handlePointerEnd}
-        aria-label="Galeria de fotos. Arraste para os lados para ver mais imagens."
-      >
+    <section className="work-image-gallery" aria-label={`Galeria de ${title}`}>
+      <div className="work-bento-section">
+        <header className="work-bento-header">
+          <h1>{title}</h1>
+          <p>{description}</p>
+        </header>
         <div className="work-bento-track">
-          {imageItems.map((item) => (
-            <button
-              className={cn("work-bento-card", item.span)}
-              key={item.id}
-              type="button"
-              onClick={() => {
-                if (dragRef.current.moved) {
-                  dragRef.current.moved = false;
-                  return;
-                }
-                setSelectedItem(item);
-              }}
-              aria-label={`Ampliar ${item.title}: ${item.desc}`}
-            >
-              <Image src={item.url} alt={item.alt} fill sizes="(max-width: 650px) 76vw, (max-width: 1050px) 40vw, 30vw" unoptimized />
-              <span className="work-bento-shade" aria-hidden="true" />
-              <span className="work-bento-caption">
-                <strong>{item.title}</strong>
-                <span>{item.desc}</span>
-              </span>
-            </button>
-          ))}
+          {imageItems.map((item) => photoButton(item, `work-bento-card ${item.span ?? ""}`))}
         </div>
+      </div>
+
+      <div className="work-mobile-gallery">
+        <header className="work-mobile-gallery-heading">
+          <h1>{title}</h1>
+          <p>{description}</p>
+        </header>
+        {imageItems[0] && photoButton(imageItems[0], "work-mobile-gallery-cover")}
+        {imageItems.length > 1 && (
+          <>
+            <h2>Galeria da obra</h2>
+            <div className="work-mobile-gallery-grid">
+              {imageItems.slice(1).map((item) => photoButton(item, "work-mobile-gallery-item"))}
+            </div>
+          </>
+        )}
       </div>
 
       <dialog
@@ -133,7 +118,10 @@ export default function InteractiveImageBentoGallery({
         }}
       >
         {selectedItem && (
-          <div className="work-bento-dialog-content">
+          <div
+            className="work-bento-dialog-content"
+            style={{ width: `${modalSize.width}px`, height: `${modalSize.height}px` }}
+          >
             <button
               className="work-bento-dialog-close"
               type="button"
@@ -143,8 +131,7 @@ export default function InteractiveImageBentoGallery({
             >
               <X size={22} aria-hidden="true" />
             </button>
-            <Image src={selectedItem.url} alt={selectedItem.alt} fill sizes="(max-width: 900px) 96vw, 1200px" unoptimized />
-            <p><strong>{selectedItem.title}</strong><span>{selectedItem.desc}</span></p>
+            <Image src={selectedItem.url} alt={selectedItem.alt} fill sizes="100vw" unoptimized />
           </div>
         )}
       </dialog>

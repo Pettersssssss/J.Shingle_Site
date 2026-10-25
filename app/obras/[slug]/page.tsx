@@ -27,7 +27,6 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
   const imageItems: BentoGalleryImage[] = Array.from({ length: work.imageCount }, (_, index) => ({
     id: index + 1,
     title: `${work.title} · Foto ${String(index + 1).padStart(2, "0")}`,
-    desc: `${work.city} · ${work.state}`,
     url: workImage(work, index + 1),
     alt: index === 0
       ? work.coverAlt
