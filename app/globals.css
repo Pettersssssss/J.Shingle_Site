@@ -748,16 +748,14 @@ body { background: #ffffff; }
 .work-bento-header { max-width: 820px; margin: 0 auto; text-align: center; }
 .work-bento-header h1 { margin: 0; font: 700 clamp(2.8rem, 6vw, 5.2rem)/1.04 var(--font-display); letter-spacing: -.055em; }
 .work-bento-header p { margin: 18px auto 0; color: var(--muted); font-size: 1.05rem; line-height: 1.65; }
-.work-bento-track { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: start; gap: 16px; margin-top: 36px; }
+.work-bento-track { columns: 4; column-gap: 16px; margin-top: 36px; }
 .work-bento-card, .work-mobile-gallery-cover, .work-mobile-gallery-item { position: relative; display: block; min-width: 0; padding: 0; overflow: hidden; border: 1px solid rgba(23,26,34,.12); border-radius: 20px; background: var(--mist); cursor: zoom-in; }
-.work-bento-card { width: 100%; }
-.work-bento-card--large { grid-column: span 2; }
-.work-bento-card--tall { grid-column: span 1; }
-.work-bento-card--wide { grid-column: span 2; }
+.work-bento-card { width: 100%; margin: 0 0 16px; break-inside: avoid; }
 .work-bento-card img, .work-mobile-gallery-cover img, .work-mobile-gallery-item img { object-fit: contain; }
 .work-bento-card:focus-visible, .work-mobile-gallery-cover:focus-visible, .work-mobile-gallery-item:focus-visible { outline: 3px solid var(--ring); outline-offset: 4px; }
 .work-mobile-gallery { display: none; }
-.work-bento-dialog { position: fixed; inset: 0; width: auto; max-width: calc(100vw - 32px); max-height: calc(100dvh - 32px); margin: auto; padding: 0; overflow: visible; border: 0; background: transparent; color: #fff; }
+.work-bento-dialog { position: fixed; inset: 0; place-items: center; box-sizing: border-box; width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 12px; overflow: hidden; border: 0; background: transparent; color: #fff; }
+.work-bento-dialog[open] { display: grid; }
 .work-bento-dialog::backdrop { background: rgba(14,17,22,.9); backdrop-filter: blur(8px); }
 .work-bento-dialog-content { position: relative; max-width: calc(100vw - 32px); max-height: calc(100dvh - 32px); overflow: hidden; border: 1px solid rgba(255,255,255,.18); border-radius: 18px; background: #11151b; }
 .work-bento-dialog-content img { object-fit: contain; }
@@ -770,7 +768,7 @@ body { background: #ffffff; }
 }
 @media (max-width: 1050px) {
   .works-cards, .work-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .work-bento-track { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .work-bento-track { columns: 3; }
 }
 @media (max-width: 650px) {
   .works-page-hero h1 { font-size: clamp(2.8rem, 11vw, 4.8rem); }
@@ -792,7 +790,7 @@ body { background: #ffffff; }
   .work-mobile-gallery h2 { margin: 0 0 20px; font: 600 clamp(1.8rem, 8vw, 2.6rem)/1.12 var(--font-display); letter-spacing: -.04em; }
   .work-mobile-gallery-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
   .work-mobile-gallery-item { width: 100%; border-radius: 18px; }
-  .work-bento-dialog { max-width: calc(100vw - 24px); max-height: calc(100dvh - 24px); }
+  .work-bento-dialog { padding: 12px; }
   .work-bento-dialog-content { max-width: calc(100vw - 24px); max-height: calc(100dvh - 24px); border-radius: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {

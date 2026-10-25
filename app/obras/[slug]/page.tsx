@@ -24,20 +24,15 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
   const work = works.find((item) => item.slug === slug);
   if (!work) notFound();
 
-  const imageItems: BentoGalleryImage[] = Array.from({ length: work.imageCount }, (_, index) => ({
-    id: index + 1,
-    title: `${work.title} · Foto ${String(index + 1).padStart(2, "0")}`,
-    url: workImage(work, index + 1),
+  const imageNumbers = Array.from({ length: work.imageCount }, (_, index) => index + 1)
+    .filter((number) => !work.excludedImageNumbers?.includes(number));
+  const imageItems: BentoGalleryImage[] = imageNumbers.map((imageNumber, index) => ({
+    id: imageNumber,
+    title: `${work.title} · Foto ${String(imageNumber).padStart(2, "0")}`,
+    url: workImage(work, imageNumber),
     alt: index === 0
       ? work.coverAlt
-      : `Registro fotográfico ${index + 1} da obra ${work.title}, em ${work.city}`,
-    span: index === 0
-      ? "work-bento-card--large"
-      : index % 6 === 2
-        ? "work-bento-card--tall"
-        : index % 6 === 5
-          ? "work-bento-card--wide"
-          : undefined,
+      : `Registro fotográfico ${imageNumber} da obra ${work.title}, em ${work.city}`,
   }));
 
   return <><SiteHeader /><main>

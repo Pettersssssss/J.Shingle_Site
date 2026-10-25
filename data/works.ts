@@ -8,6 +8,7 @@ export type Work = {
   summary: string;
   coverAlt: string;
   imageCount: number;
+  excludedImageNumbers?: number[];
 };
 
 export const works: Work[] = [
@@ -28,6 +29,7 @@ export const works: Work[] = [
     summary: "Domo revestido de Shingle com deck e espaços de convivência na floresta.",
     coverAlt: "Domo da floresta com cobertura Shingle e deck de madeira",
     imageCount: 6,
+    excludedImageNumbers: [5],
   },
   {
     slug: "sarapui",
