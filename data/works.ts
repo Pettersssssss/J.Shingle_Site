@@ -12,15 +12,6 @@ export type Work = {
 
 export const works: Work[] = [
   {
-    slug: "jambeiro",
-    title: "Jambeiro",
-    city: "Jambeiro",
-    state: "SP",
-    summary: "Domo geodésico com cobertura Shingle, fachada envidraçada e paisagismo.",
-    coverAlt: "Domo geodésico de Jambeiro com cobertura escura e fachada de vidro",
-    imageCount: 8,
-  },
-  {
     slug: "belem",
     title: "Belém",
     city: "Belém",
@@ -48,31 +39,13 @@ export const works: Work[] = [
     imageCount: 11,
   },
   {
-    slug: "atibaia",
-    title: "Atibaia",
-    city: "Atibaia",
-    state: "SP",
-    summary: "Domo de cobertura Shingle visto do deck, da paisagem e de cima.",
-    coverAlt: "Vista aérea do domo com cobertura Shingle em Atibaia",
-    imageCount: 12,
-  },
-  {
     slug: "sarapui",
     title: "Sarapuí",
     city: "Sarapuí",
     state: "SP",
     summary: "Domo de grande escala, da execução da cobertura aos ambientes internos.",
     coverAlt: "Domo de cobertura Shingle em Sarapuí visto de frente",
-    imageCount: 18,
-  },
-  {
-    slug: "tiradentes",
-    title: "Tiradentes",
-    city: "Tiradentes",
-    state: "MG",
-    summary: "Domo na paisagem mineira visto do pôr do sol e de cima.",
-    coverAlt: "Domo geodésico em Tiradentes ao pôr do sol",
-    imageCount: 4,
+    imageCount: 5,
   },
 ];
 
