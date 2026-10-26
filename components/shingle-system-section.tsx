@@ -21,7 +21,7 @@ const layers = [
 
 export function ShingleSystemSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [arrows, setArrows] = useState<string[]>([]);
+  const [arrows, setArrows] = useState<{ path: string; x: number; y: number }[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -40,16 +40,20 @@ export function ShingleSystemSection() {
       const drawnHeight = image.naturalHeight * scale;
       const imageLeft = figureRect.left - sectionRect.left;
       const imageTop = figureRect.top - sectionRect.top + (figureRect.height - drawnHeight) / 2;
-      const layerY = [0.47, 0.62, 0.98];
+      const layerPoints = [
+        { x: 0.95, y: 0.34 },
+        { x: 0.95, y: 0.56 },
+        { x: 0.95, y: 0.84 },
+      ];
 
       setArrows(layers.map((layer, index) => {
         const target = layer.getBoundingClientRect();
-        const x1 = imageLeft + drawnWidth * 0.99;
-        const y1 = imageTop + drawnHeight * layerY[index];
+        const point = layerPoints[index];
+        const x1 = imageLeft + drawnWidth * point.x;
+        const y1 = imageTop + drawnHeight * point.y;
         const x2 = target.left - sectionRect.left - 10;
         const y2 = target.top - sectionRect.top + target.height / 2;
-        const bend = Math.max(18, (x2 - x1) * 0.48);
-        return `M ${x1} ${y1} C ${x1 + bend} ${y1}, ${x2 - bend} ${y2}, ${x2} ${y2}`;
+        return { path: `M ${x1} ${y1} L ${x2} ${y2}`, x: x1, y: y1 };
       }));
     };
 
@@ -74,7 +78,10 @@ export function ShingleSystemSection() {
           <path d="M0,0 L7,3.5 L0,7 Z" fill="currentColor" />
         </marker>
       </defs>
-      {arrows.map((path, index) => <path key={index} d={path} markerEnd="url(#shingle-arrow-tip)" />)}
+      {arrows.map((arrow, index) => <g key={index}>
+        <circle cx={arrow.x} cy={arrow.y} r="3" />
+        <path d={arrow.path} markerEnd="url(#shingle-arrow-tip)" />
+      </g>)}
     </svg>
     <figure className="shingle-system-visual">
       <Image
@@ -99,7 +106,6 @@ export function ShingleSystemSection() {
       </ol>
 
       <p className="shingle-system-close">Juntas, essas três camadas formam uma cobertura leve, estanque e durável, com acabamento elegante para o seu projeto.</p>
-      <a className="button button-primary shingle-system-cta" href="#contato">Fale com a J.Shingle e monte o sistema ideal para a sua obra.</a>
     </div>
   </section>;
 }
