@@ -11,6 +11,7 @@ import { HeroTiltLogo } from "@/components/hero-tilt-logo";
 import { ShingleModelCard } from "@/components/shingle-model-card";
 import { FinishGallery } from "@/components/finish-gallery";
 import { works, workImage } from "@/data/works";
+import { ShingleSystemSection } from "@/components/shingle-system-section";
 
 const projects = works.map((work) => ({
   name: work.title,
@@ -58,6 +59,8 @@ export default function HomePage() {
             </article>
           </ScrollReveal>
         </section>
+
+        <ShingleSystemSection />
 
         <section className="portfolio-section" id="obras">
           <div className="shell">
