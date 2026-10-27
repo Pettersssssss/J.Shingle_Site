@@ -5,7 +5,11 @@ import { WhatsAppFloat } from "@/components/whatsapp-float";
 export const metadata: Metadata = {
   title: { default: "J.SHINGLE | Coberturas especiais em telhas Shingle", template: "%s | J.SHINGLE" },
   description: "Coberturas em telhas Shingle para domos geodésicos, residências de alto padrão e projetos arquitetônicos especiais.",
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png", sizes: "192x192" }],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
