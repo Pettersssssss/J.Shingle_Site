@@ -881,9 +881,10 @@ body { background: #ffffff; }
 /* Editorial explainer for the Shingle roofing system. */
 .shingle-system-section { position: relative; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); grid-template-areas: "intro intro" "visual copy"; align-items: stretch; overflow: hidden; background: #fff; color: #252936; }
 .shingle-system-intro { grid-area: intro; width: min(100%, 1280px); margin-inline: auto; padding: 68px 28px 36px; text-align: center; }
-.shingle-system-intro .eyebrow { margin: 0 0 10px; color: #41465b; font: 700 18px/1.35 var(--font-display); letter-spacing: .01em; text-align: center; }
+.shingle-system-intro .eyebrow { margin: 0 0 10px; color: #41465b; font: 700 12px/1.35 var(--font-display); letter-spacing: .01em; text-align: center; }
 .shingle-system-intro h2 { max-width: 1180px; margin: 0 auto; color: #08090b; font: 600 74px/.99 var(--font-display); letter-spacing: -.045em; text-align: center; text-wrap: balance; }
-.shingle-system-lead { max-width: 850px; margin: 17px auto 0; color: #555b69; font: 400 15px/1.6 Arial, sans-serif; text-align: center; }
+.shingle-system-lead { max-width: 850px; margin: 17px auto 0; color: #555b69; font: 400 16px/1.6 Arial, sans-serif; text-align: center; }
+.shingle-word { font-family: Arial, sans-serif; text-transform: uppercase; }
 .shingle-system-arrows { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; color: #151515; pointer-events: none; }
 .shingle-system-arrows > g > path { fill: none; stroke: currentColor; stroke-width: 1.35; vector-effect: non-scaling-stroke; }
 .shingle-system-arrows circle { fill: #fff; stroke: currentColor; stroke-width: 1.4; vector-effect: non-scaling-stroke; }
@@ -897,9 +898,9 @@ body { background: #ffffff; }
 .shingle-system-layers li:nth-child(3) { top: calc(82% - 13px); }
 .shingle-system-number { display: none; }
 .shingle-system-layers li > div { max-width: 630px; text-align: left; }
-.shingle-system-layers h3 { margin: 0; color: #111; font: 600 21px/1.25 var(--font-display); letter-spacing: -.015em; }
-.shingle-system-layers p { max-width: 630px; margin: 6px 0 0; color: #555b69; font: 400 15px/1.55 Arial, sans-serif; }
-.shingle-system-close { max-width: 630px; margin: 12px 0 0; color: #41465b; font: 600 15px/1.55 Arial, sans-serif; text-align: left; }
+.shingle-system-layers h3 { margin: 0; color: #111; font: 600 30px/1.2 var(--font-display); letter-spacing: -.015em; }
+.shingle-system-layers p, .shingle-system-close p { max-width: 630px; margin: 6px 0 0; color: #555b69; font: 400 16px/1.55 Arial, sans-serif; }
+.shingle-system-close { max-width: 630px; margin: 12px 0 0; color: #41465b; font: 600 16px/1.55 Arial, sans-serif; text-align: left; }
 @media (max-width: 900px) {
   .shingle-system-section { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
   .shingle-system-intro { padding: 58px 26px 30px; }
@@ -907,14 +908,14 @@ body { background: #ffffff; }
   .shingle-system-visual { width: min(100%, 40.68vw, 424px); height: clamp(390px, 48vw, 500px); }
   .shingle-system-copy { padding: 0 28px 22px 8px; }
   .shingle-system-layers { height: clamp(390px, 48vw, 500px); }
-  .shingle-system-layers h3 { font-size: 19px; }
-  .shingle-system-layers p, .shingle-system-close { font-size: 15px; }
+  .shingle-system-layers h3 { font-size: 30px; }
+  .shingle-system-layers p, .shingle-system-close, .shingle-system-close p { font-size: 16px; }
 }
 @media (max-width: 760px) {
   .shingle-system-section { grid-template-columns: minmax(0, 1fr); grid-template-areas: "intro" "visual" "copy"; }
   .shingle-system-arrows { display: none; }
   .shingle-system-intro { padding: 58px 22px 28px; }
-  .shingle-system-intro .eyebrow { font-size: 16px; }
+  .shingle-system-intro .eyebrow { font-size: 12px; }
   .shingle-system-intro h2 { font-size: clamp(40px, 10vw, 52px); line-height: 1.02; }
   .shingle-system-lead { margin-top: 14px; font-size: 15px; }
   .shingle-system-visual { width: min(100%, 420px); height: auto; aspect-ratio: .848; margin-inline: auto; }
@@ -923,9 +924,9 @@ body { background: #ffffff; }
   .shingle-system-layers li, .shingle-system-layers li:nth-child(n) { position: relative; inset: auto; display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: start; gap: 8px; padding: 22px 0; border-top: 1px solid rgba(65,70,91,.15); }
   .shingle-system-number { display: grid; width: 26px; height: 26px; place-items: center; border: 1px solid rgba(65,70,91,.24); border-radius: 50%; color: #41465b; background: #fff; font: 600 11px/1 var(--font-display); }
   .shingle-system-layers li > div { max-width: 520px; margin-inline: auto; text-align: center; }
-  .shingle-system-layers h3 { font-size: 19px; line-height: 1.35; }
-  .shingle-system-layers p { margin-top: 6px; font-size: 15px; line-height: 1.55; }
-  .shingle-system-close { margin: 20px auto 0; font-size: 15px; text-align: center; }
+  .shingle-system-layers h3 { font-size: 30px; line-height: 1.2; }
+  .shingle-system-layers p, .shingle-system-close p { margin-top: 6px; font-size: 16px; line-height: 1.55; }
+  .shingle-system-close { margin: 20px auto 0; font-size: 16px; text-align: center; }
 }
 @media (hover: hover) and (pointer: fine) {
   .button-outline:hover { background: var(--mist); }

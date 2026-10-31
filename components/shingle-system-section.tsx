@@ -6,16 +6,18 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 
 const layers = [
   {
-    title: "Telha Shingle, linha Oakridge (cor Areia)",
-    description: "A camada visível do telhado. Com acabamento em grânulos minerais e tonalidades que variam entre si, ela cria um visual sofisticado e protege contra sol, chuva e vento.",
+    title: "01 — Telha",
+    description: "É a camada externa da cobertura, formada por fibra de vidro, asfalto e grânulos minerais. Flexível e resistente às condições climáticas, está disponível em diferentes cores e nos modelos 3 Abas e Laminada, com acabamentos que se adaptam ao estilo de cada projeto.",
   },
   {
     title: "Subcobertura",
-    description: "Instalada sob as telhas, funciona como uma segunda barreira impermeável. Ela protege a estrutura contra umidade e infiltrações, mesmo em caso de vento forte ou chuva com pressão.",
+    title: "02 — Subcobertura",
+    description: "Instalada abaixo das telhas, é uma camada adicional de proteção contra a entrada de água. Ajuda a impedir que a umidade alcance a base do telhado, especialmente em situações de chuva acompanhada de vento.",
   },
   {
     title: "Placas de OSB",
-    description: "A base do sistema. Resistentes e uniformes, oferecem a superfície firme e plana que sustenta as demais camadas e garante um assentamento seguro.",
+    title: "03 — Placas de OSB",
+    description: "Formam uma base contínua e resistente sobre a estrutura do telhado. São responsáveis por oferecer uma superfície firme para a fixação das telhas e devem ser dimensionadas de acordo com as características da cobertura.",
   },
 ];
 
@@ -74,8 +76,8 @@ export function ShingleSystemSection() {
   return <section ref={sectionRef} className="shingle-system-section" aria-labelledby="shingle-system-title">
     <ScrollReveal className="shingle-system-intro">
       <p className="eyebrow eyebrow-dark">Um sistema completo para a sua cobertura</p>
-      <h2 id="shingle-system-title">Sistema de instalação da Shingle</h2>
-      <p className="shingle-system-lead">A telha shingle da J.Shingle não trabalha sozinha. Ela faz parte de um sistema de camadas que se complementam para entregar durabilidade, conforto e proteção contra infiltrações.</p>
+      <h2 id="shingle-system-title">Sistema de instalação<br /><span className="shingle-word">SHINGLE</span></h2>
+      <p className="shingle-system-lead">A cobertura <span className="shingle-word">SHINGLE</span> combina telhas asfálticas, subcobertura e uma base estrutural contínua. Cada camada tem uma função específica na proteção contra a chuva e na durabilidade do telhado.</p>
     </ScrollReveal>
 
     <svg className="shingle-system-arrows" aria-hidden="true" focusable="false">
@@ -92,7 +94,7 @@ export function ShingleSystemSection() {
     <figure className="shingle-system-visual">
       <Image
         src="/jshingle-system-layers-black.jpg"
-        alt="Vista explodida da cobertura em três camadas: telhas Shingle, subcobertura e placas de OSB"
+        alt="Vista explodida da cobertura em três camadas: telhas SHINGLE, subcobertura e placas de OSB"
         fill
         sizes="(max-width: 760px) 100vw, (max-width: 900px) 41vw, 36vw"
       />
@@ -101,11 +103,11 @@ export function ShingleSystemSection() {
       <ol className="shingle-system-layers">
         {layers.map((layer, index) => <li key={layer.title}>
           <span className="shingle-system-number" aria-hidden="true">0{index + 1}</span>
-          <div><h3>{layer.title}</h3><p>{layer.description}</p></div>
+          <div><h3>{layer.title}{index === 0 && <> <span className="shingle-word">SHINGLE</span></>}</h3><p>{layer.description}</p></div>
         </li>)}
       </ol>
 
-      <p className="shingle-system-close">Juntas, essas três camadas formam uma cobertura leve, estanque e durável, com acabamento elegante para o seu projeto.</p>
+      <div className="shingle-system-close"><strong>O resultado depende do sistema completo.</strong><p>Além dessas três camadas, a instalação exige atenção à inclinação do telhado, à ventilação, às fixações e aos arremates. A J.Shingle avalia esses detalhes para definir a solução adequada a cada projeto.</p></div>
     </div>
   </section>;
 }
