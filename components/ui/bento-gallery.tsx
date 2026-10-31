@@ -74,7 +74,7 @@ export default function InteractiveImageBentoGallery({
         alt={item.alt}
         fill
         sizes="(max-width: 650px) 100vw, (max-width: 1050px) 50vw, 25vw"
-        unoptimized
+        quality={100}
         onLoad={(event) => rememberImageSize(item.id, event.currentTarget)}
       />
     </button>

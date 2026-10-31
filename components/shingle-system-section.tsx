@@ -6,17 +6,15 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 
 const layers = [
   {
-    title: "01 — Telha",
+    title: "Telha",
     description: "É a camada externa da cobertura, formada por fibra de vidro, asfalto e grânulos minerais. Flexível e resistente às condições climáticas, está disponível em diferentes cores e nos modelos 3 Abas e Laminada, com acabamentos que se adaptam ao estilo de cada projeto.",
   },
   {
     title: "Subcobertura",
-    title: "02 — Subcobertura",
     description: "Instalada abaixo das telhas, é uma camada adicional de proteção contra a entrada de água. Ajuda a impedir que a umidade alcance a base do telhado, especialmente em situações de chuva acompanhada de vento.",
   },
   {
     title: "Placas de OSB",
-    title: "03 — Placas de OSB",
     description: "Formam uma base contínua e resistente sobre a estrutura do telhado. São responsáveis por oferecer uma superfície firme para a fixação das telhas e devem ser dimensionadas de acordo com as características da cobertura.",
   },
 ];

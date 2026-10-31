@@ -106,7 +106,7 @@ export default function HomePage() {
               <a className="button button-primary instagram-cta" href={company.instagram}>Ver Instagram</a>
             </div>
             <div className="instagram-art">
-              <Image src="/jshingle-instagram-figma.png" alt="Celular com o perfil da J.SHINGLE no Instagram e ícones do aplicativo" width={2095} height={1276} sizes="(max-width: 860px) 200vw, 100vw" unoptimized />
+              <Image src="/jshingle-instagram-figma.png" alt="Celular com o perfil da J.SHINGLE no Instagram e ícones do aplicativo" width={2095} height={1276} sizes="(max-width: 860px) 100vw, 50vw" quality={100} />
             </div>
           </div>
         </section>

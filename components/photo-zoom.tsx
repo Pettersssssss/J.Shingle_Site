@@ -20,7 +20,7 @@ export function PhotoZoom({ src, alt, className = "", caption }: { src: string; 
 
   return <>
     <button className={`photo-zoom-trigger ${className}`} type="button" onClick={show} aria-label={`Ampliar: ${alt}`}>
-      <Image src={src} alt={alt} fill sizes="(max-width: 700px) 100vw, 40vw" unoptimized />
+      <Image src={src} alt={alt} fill sizes="(max-width: 700px) 100vw, 40vw" quality={100} />
       {caption && <span>{caption}</span>}
     </button>
     <dialog ref={dialog} className="photo-zoom-dialog" aria-label={`Imagem ampliada: ${alt}`} onClose={() => setOpen(false)} onClick={(event) => { if (event.target === dialog.current) close(); }}>

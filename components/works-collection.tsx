@@ -36,7 +36,7 @@ export function WorksCollection() {
         {visibleWorks.map((work) => (
           <Link className="work-card" href={`/obras/${work.slug}`} key={work.slug}>
             <div className="work-card-media">
-              <Image src={workImage(work, 1)} alt={work.coverAlt} fill sizes="(max-width: 650px) 100vw, (max-width: 1050px) 50vw, 33vw" unoptimized />
+              <Image src={workImage(work, 1)} alt={work.coverAlt} fill sizes="(max-width: 650px) 100vw, (max-width: 1050px) 50vw, 33vw" quality={100} />
             </div>
             <div className="work-card-copy">
               <p>{work.city} · {work.state}</p>
