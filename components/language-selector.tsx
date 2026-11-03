@@ -2,6 +2,7 @@
 
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
+import { applySiteLanguage } from "@/lib/site-translations";
 
 type Language = "pt-BR" | "en-US" | "es-ES";
 
@@ -22,7 +23,7 @@ export function LanguageSelector({ dark = false }: { dark?: boolean }) {
       try { stored = window.localStorage.getItem("jshingle-language") ?? "pt-BR"; } catch { /* Keep the default when storage is unavailable. */ }
       const next: Language = stored === "en-US" || stored === "es-ES" ? stored : "pt-BR";
       setLanguage(next);
-      document.documentElement.lang = next;
+      applySiteLanguage(next);
     };
     syncLanguage();
     window.addEventListener("jshingle-language-change", syncLanguage);
@@ -31,7 +32,7 @@ export function LanguageSelector({ dark = false }: { dark?: boolean }) {
 
   function chooseLanguage(next: Language) {
     try { window.localStorage.setItem("jshingle-language", next); } catch { /* The current selection still applies for this visit. */ }
-    document.documentElement.lang = next;
+    applySiteLanguage(next);
     setLanguage(next);
     setOpen(false);
     window.dispatchEvent(new Event("jshingle-language-change"));
@@ -42,7 +43,7 @@ export function LanguageSelector({ dark = false }: { dark?: boolean }) {
       <button
         className="language-picker-trigger"
         type="button"
-        aria-label={`Idioma: ${selected.label}`}
+        aria-label="Selecionar idioma"
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
@@ -74,3 +75,4 @@ export function LanguageSelector({ dark = false }: { dark?: boolean }) {
     </div>
   );
 }
+
