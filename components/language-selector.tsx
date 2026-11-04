@@ -4,12 +4,11 @@ import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { applySiteLanguage } from "@/lib/site-translations";
 
-type Language = "pt-BR" | "en-US" | "es-ES";
+type Language = "pt-BR" | "en-US";
 
 const languages: { id: Language; flag: string; short: string; label: string }[] = [
   { id: "pt-BR", flag: "🇧🇷", short: "PT", label: "Português (Brasil)" },
   { id: "en-US", flag: "🇺🇸", short: "EN", label: "English (US)" },
-  { id: "es-ES", flag: "🇪🇸", short: "ES", label: "Español" },
 ];
 
 export function LanguageSelector({ dark = false }: { dark?: boolean }) {
@@ -21,13 +20,11 @@ export function LanguageSelector({ dark = false }: { dark?: boolean }) {
     const syncLanguage = () => {
       let stored = "pt-BR";
       try { stored = window.localStorage.getItem("jshingle-language") ?? "pt-BR"; } catch { /* Keep the default when storage is unavailable. */ }
-      const next: Language = stored === "en-US" || stored === "es-ES" ? stored : "pt-BR";
+      const next: Language = stored === "en-US" ? stored : "pt-BR";
       setLanguage(next);
       applySiteLanguage(next);
     };
     syncLanguage();
-    window.addEventListener("jshingle-language-change", syncLanguage);
-    return () => window.removeEventListener("jshingle-language-change", syncLanguage);
   }, []);
 
   function chooseLanguage(next: Language) {
@@ -35,7 +32,6 @@ export function LanguageSelector({ dark = false }: { dark?: boolean }) {
     applySiteLanguage(next);
     setLanguage(next);
     setOpen(false);
-    window.dispatchEvent(new Event("jshingle-language-change"));
   }
 
   return (
@@ -75,4 +71,3 @@ export function LanguageSelector({ dark = false }: { dark?: boolean }) {
     </div>
   );
 }
-
